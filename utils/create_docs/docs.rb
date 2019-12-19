@@ -50,4 +50,38 @@ module Docs
     puts "Reseting/clearing versions.yaml"
     File.write(versions_path, first_line)
   end
+
+  def self.add_topic(topic_name:, doc_folder:, yaml_path:)
+    name_pretty = topic_name.tr('-', ' ').split.map(&:capitalize).join(' ')
+    FileUtils.cd(doc_folder, verbose: true) do
+      versions = Dir.glob('*')
+      versions.each do |version|
+        FileUtils.cd(version, verbose: true) do
+          first_file = Dir.glob('*').first
+          liquid = File.read(first_file).partition( /---.*?(---)/m )[1]
+          new_liquid = liquid.gsub(/^title: \w*/, "title: #{name_pretty}")
+          File.write("#{topic_name}.md", new_liquid)
+        end
+      end
+    end
+
+    data = YAML.load_file(yaml_path)
+    data << { "name" => topic_name, "pretty_name" => name_pretty}
+
+    File.open(yaml_path, 'w') {|f| f.write data.to_yaml }
+  end
+
+  def self.remove_topic(topic_name:, doc_folder:, yaml_path:)
+    file = "#{topic_name}.md"
+    FileUtils.cd(doc_folder, verbose: true) do
+      versions = Dir.glob('*')
+      versions.each do |version|
+        file_name = "#{version}/#{topic_name}.md"
+        FireUtils.rm(file_name) if File.exist?(file_name)
+      end
+    end
+
+    data = YAML.load_file(yaml_path).delete_if { |d| d["name"] == topic_name }
+    File.open(yaml_path, 'w') {|f| f.write data.to_yaml }
+  end
 end

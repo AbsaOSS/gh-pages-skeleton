@@ -6,8 +6,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    addressable (2.6.0)
-      public_suffix (>= 2.0.2, < 4.0)
+    addressable (2.8.1)
+      public_suffix (>= 2.0.2, < 6.0)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -16,8 +16,8 @@ GEM
     commonmarker (0.17.13)
       ruby-enum (~> 0.5)
     concurrent-ruby (1.1.5)
-    dnsruby (1.61.2)
-      addressable (~> 2.5)
+    dnsruby (1.61.9)
+      simpleidn (~> 0.1)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -30,9 +30,10 @@ GEM
     ffi (1.11.1)
     forwardable-extended (2.6.0)
     gemoji (3.0.1)
-    git (1.11.0)
+    git (1.13.0)
+      addressable (~> 2.8)
       rchardet (~> 1.8)
-    github-pages (198)
+    github-pages (199)
       activesupport (= 4.2.11.1)
       github-pages-health-check (= 1.16.1)
       jekyll (= 3.8.5)
@@ -74,7 +75,7 @@ GEM
       listen (= 3.1.5)
       mercenary (~> 0.3)
       minima (= 2.5.0)
-      nokogiri (>= 1.8.5, < 2.0)
+      nokogiri (>= 1.10.4, < 2.0)
       rouge (= 2.2.1)
       terminal-table (~> 1.4)
     github-pages-health-check (1.16.1)
@@ -209,7 +210,8 @@ GEM
     multipart-post (2.1.1)
     nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
-    octokit (4.14.0)
+    octokit (4.22.0)
+      faraday (>= 0.9)
       sawyer (~> 0.8.0, >= 0.5.3)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
@@ -232,6 +234,8 @@ GEM
     sawyer (0.8.2)
       addressable (>= 2.3.5)
       faraday (> 0.8, < 2.0)
+    simpleidn (0.2.1)
+      unf (~> 0.1.4)
     terminal-table (1.8.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
     thread_safe (0.3.6)
@@ -239,13 +243,16 @@ GEM
       ethon (>= 0.9.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.8.2)
     unicode-display_width (1.6.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  git (~> 1.11)
+  git (~> 1.13)
   github-pages
   jekyll-feed (~> 0.6)
   jekyll-paginate (~> 1.1)
